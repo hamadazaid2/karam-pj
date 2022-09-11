@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\HamadaSite\MainController;
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [MainController::class, 'index']);
-Route::get('admin', function(){
-    return view('admin.index');
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('site-config', [AdminController::class, 'siteConfiuration'])->name('site.config.show');
+    Route::post('update/site-config', [AdminController::class, 'updateSiteConfig'])->name('site.config.update');
 });
