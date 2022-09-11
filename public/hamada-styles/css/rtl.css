@@ -1,0 +1,53 @@
+#navigation-menu {
+    float: left;
+    margin-top: 10px;
+}
+.main-menu > li {
+    float: right;
+    margin-left: 25px;
+    margin-right: auto;
+}
+.main-menu > li:last-child {
+    margin-left: 0;
+}
+.logo-site {
+    float: right;
+    margin-left: -50px;
+}
+.section_home:after {
+    transform: scale(1,1);
+}
+.home_thumb {
+    right: auto;
+    left: 0px;
+}
+.app_link > li {
+    float: right;
+    margin-left: 20px;
+	margin-right: auto;
+}
+.feat_meta li {
+    padding-left:initial ;
+    padding-right: 50px;
+}
+.feat_meta li > span {
+    left: auto;
+    right: 0;
+}
+.section_features .secTit {
+    margin-left: auto;
+    margin-right: 15px;
+}
+.section_contact:before {
+    right: 0;
+    left: auto;
+    transform: scale(-1,1);
+}
+.c_ingo_item > span {
+    left: auto;
+    right: 0;
+}
+.c_ingo_item {
+    padding-left: initial;
+    padding-right: 55px;
+}

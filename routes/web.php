@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KaramSite\MainController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [MainController::class, 'index']);
+Route::get('admin', function(){
+    return view('admin.index');
 });
