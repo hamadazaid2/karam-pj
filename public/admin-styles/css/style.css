@@ -68,7 +68,7 @@
     top: 0;
     left: 0;
     bottom: 0;
-    width: 250px;
+    width: 280px;
     height: 100vh;
     overflow-y: auto;
     background: var(--secondary);
@@ -126,6 +126,7 @@
     border-left: 3px solid var(--secondary);
     border-radius: 0 30px 30px 0;
     outline: none;
+    font-size: 0.9rem;
 }
 
 .sidebar .navbar .navbar-nav .nav-link:hover,
@@ -133,6 +134,7 @@
     color: var(--primary);
     background: var(--dark);
     border-color: var(--primary);
+
 }
 
 .sidebar .navbar .navbar-nav .nav-link i {
@@ -169,6 +171,7 @@
     padding-left: 25px;
     border-radius: 0 30px 30px 0;
     color: var(--light);
+    font-size: 0.9rem;
 }
 
 .sidebar .navbar .dropdown-item:hover,
