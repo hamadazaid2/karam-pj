@@ -9,6 +9,6 @@ class AboutDiv extends Model
 {
     use HasFactory;
     protected $table = 'about_divs';
-    protected $fillable = ['i_tag', 'header', 'paragraph'];
+    protected $fillable = ['span', 'header', 'paragraph'];
     public $timestamps = false;
 }

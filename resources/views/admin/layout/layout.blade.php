@@ -25,8 +25,11 @@
             <!-- Navbar Start -->
             @include('admin.statistics.nav')
             <!-- Navbar End -->
+            <div class="container-fluid pt-4 px-4">
+                @yield('content')
+            </div>
 
-            @yield('content')
+
 
 
             <!-- Sales Chart Start -->

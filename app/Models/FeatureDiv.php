@@ -9,6 +9,6 @@ class FeatureDiv extends Model
 {
     use HasFactory;
     protected $table = 'feature_divs';
-    protected $fillable = ['img', 'header', 'paragraph'];
+    protected $fillable = ['i_tag', 'header', 'paragraph'];
     public $timestamps = false;
 }

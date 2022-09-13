@@ -16,6 +16,12 @@
     <link href="{{ asset('hamada-styles/css/rtl.css') }}" rel="stylesheet">
     <link href="{{ asset('hamada-styles/css/responsive.css') }}" rel="stylesheet">
 
+    <style>
+        .small-error-message{
+            color: red;
+        }
+    </style>
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
@@ -153,7 +159,9 @@
                                     <ul class="feat_meta">
                                         {{-- FEATURE DIVS --}}
                                         @foreach ($data['feature_divs'] as $feature)
-                                            <li><span><img src="{{ $feature->img }}" alt=""></span>
+                                            <li><span>
+                                                    <i class="{{ $feature->i_tag }}"></i>
+                                                </span>
                                                 {{-- {{ asset('$feature') }} --}}
                                                 <div class="secTit">
                                                     <p>{{ $feature->header }}</p>
@@ -301,13 +309,18 @@
                             </div>
                         </div>
                         <div class="col-sm-offset-1 col-sm-6">
-                            <form class="form_contact clearfix wow fadeInUp" data-wow-duration="1s"
-                                data-wow-delay="0.600s" action="#">
+                            <form class="form_contact clearfix wow fadeInUp"
+                                data-wow-duration="1s"data-wow-delay="0.600s"
+                                action="{{ route('contact.us.messages') }}" method="POST">
+                                @csrf
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>Name</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" name="name">
+                                            @error('name')
+                                                <small class="small-error-message">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -315,13 +328,19 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Email</label>
-                                            <input type="email" class="form-control">
+                                            <input type="email" class="form-control" name="email">
+                                            @error('email')
+                                                <small class="small-error-message">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Phone</label>
-                                            <input name="mobail" type="number" class="form-control">
+                                            <input type="text" class="form-control" name="phone">
+                                            @error('phone')
+                                                <small class="small-error-message">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -329,11 +348,22 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>Messages</label>
-                                            <textarea class="form-control"></textarea>
+                                            <textarea class="form-control" name="message"></textarea>
+                                            @error('message')
+                                                <small class="small-error-message">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn_contact">SEND</button>
+                                @if (Session::has('success'))
+                                <br>
+                                <br>
+                                <br>
+                                    <div class="alert alert-success" role="alert">
+                                        {{ Session::get('success') }}
+                                    </div>
+                                @endif
                             </form>
                         </div>
                     </div>

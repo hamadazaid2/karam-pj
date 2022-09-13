@@ -4,7 +4,9 @@ namespace App\Http\Controllers\HamadaSite;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\WebSiteRequests\ContactUsMessageRequest;
 use App\Models\AboutDiv;
+use App\Models\ContactUsMessages;
 use App\Models\CustomerOpenionDiv;
 use App\Models\FeatureDiv;
 use App\Models\Main;
@@ -33,5 +35,16 @@ class MainController extends Controller
             'customer_openion' => $customer_openion,
         ];
         return view('hamadaSite.index', compact('data'));
+    }
+
+    public function storeMessage(ContactUsMessageRequest $request)
+    {
+        ContactUsMessages::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'message' => $request->message,
+        ]);
+        return redirect()->to(route('index'))->with('success', 'Your message was sent successfully');
     }
 }

@@ -3,10 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminRequests\AboutDivRequest;
 use App\Http\Requests\AdminRequests\AboutRequest;
+use App\Http\Requests\AdminRequests\FeatureDivRequest;
 use App\Http\Requests\AdminRequests\HeaderRequest;
 use App\Http\Requests\AdminRequests\HowToOrderRequest;
 use App\Http\Requests\AdminRequests\SiteConfigRequest;
+use App\Http\Requests\AdminRequests\UpdateAboutDivRequest;
+use App\Models\AboutDiv;
+use App\Models\ContactUsMessages;
+use App\Models\FeatureDiv;
 use App\Models\Main;
 use App\Models\SiteSetup;
 use Illuminate\Http\Request;
@@ -61,7 +67,7 @@ class AdminController extends Controller
         return redirect()->to(route('site.header.show'))->with('success', 'Header Has Been Successfully Updated');
     }
 
-    public function siteAbout()
+    public function siteAboutTitle()
     {
         $header = Main::where('name', 'header2')->first();
         $paragraph = Main::where('name', 'paragraph2')->first();
@@ -73,14 +79,62 @@ class AdminController extends Controller
         return view('admin.sitePages.aboutUpdate', compact('data'));
     }
 
-    public function updateSiteAbout(AboutRequest $request)
+    public function updateSiteAboutTitle(AboutRequest $request)
     {
         Main::where('name', 'header2')->update(array('text' => $request->head));
         Main::where('name', 'paragraph2')->update(array('text' => $request->paragraph));
-        return redirect()->to(route('site.about.show'))->with('success', 'About Section Has Been Successfully Updated');
+        return redirect()->to(route('site.about.title.show'))->with('success', 'About Section Has Been Successfully Updated');
     }
 
+    public function siteAboutDivs()
+    {
+        $data = AboutDiv::all();
+        return view('admin.sitePages.showAboutDivs', compact('data'));
+    }
+    public function siteAboutDivsEdit($div_id)
+    {
+        $div = AboutDiv::find($div_id);
+        if (!$div) {
+            return redirect()->to(route('site.about.divs.show'));
+        }
+        return view('admin.sitePages.aboutDivUpdateShow', compact('div'));
+    }
+    public function siteAboutDivsUpdate(AboutDivRequest $request)
+    {
+        $div = AboutDiv::find($request->id);
+        if (!$div) {
+            return redirect()->to(route('site.about.divs.show'));
+        }
+        $div->update($request->all());
+        return redirect()->to(route('site.about.div.edit.show', $div->id))->with('success', 'About Div Updated Succefully');
+    }
+    public function siteAboutDivsDelete($div_id)
+    {
+        $div = AboutDiv::find($div_id);
+        if (!$div) {
+        }
+        $div->delete();
+        return redirect()->to(route('site.about.divs.show'))->with('success', 'About Div Has Been Deleted Succefully');
+    }
+    public function siteAboutNewDiv()
+    {
+        return view('admin.sitePages.aboutDivNewShow');
+    }
+    public function siteAboutNewDivStore(AboutDivRequest $request)
+    {
+        AboutDiv::create(
+            [
+                'span' => $request->span,
+                'header' => $request->header,
+                'paragraph' => $request->paragraph,
+            ]
+        );
+        return redirect()->to(route('site.about.divs.show'))->with('success', 'A New About Div Has Been Created Succefully');
+    }
 
+    // START FEATURE
+
+    //TITLES
     public function siteFeatureTitles()
     {
         $header = Main::where('name', 'header3')->first();
@@ -104,6 +158,63 @@ class AdminController extends Controller
         return redirect()->to(route('site.feature.titles.show'))->with('success', 'Feature Titles Has Been Successfully Updated');
     }
 
+    //DIVS
+
+    public function siteFeatureDivs()
+    {
+        $data = FeatureDiv::all();
+        return view('admin.sitePages.showFeatureDivs', compact('data'));
+    }
+    public function siteFeatureNewDiv()
+    {
+        return view('admin.sitePages.featureDivNewShow');
+    }
+    public function siteFeatureNewDivStore(FeatureDivRequest $request)
+    {
+        FeatureDiv::create(
+            [
+                'i_tag' => $request->i,
+                'header' => $request->header,
+                'paragraph' => $request->paragraph,
+            ]
+        );
+        return redirect()->to(route('site.feature.divs.show'))->with('success', 'A New Feature Div Has Been Created Succefully');
+    }
+    public function siteFeatureDivsEdit($div_id)
+    {
+        $div = FeatureDiv::find($div_id);
+        if (!$div) {
+            return redirect()->to(route('site.feature.divs.show'));
+        }
+        return view('admin.sitePages.featureDivUpdateShow', compact('div'));
+    }
+    public function siteFeatureDivsUpdate(FeatureDivRequest $request)
+    {
+        $div = FeatureDiv::find($request->id);
+        if (!$div) {
+            return redirect()->to(route('site.feature.divs.show'));
+        }
+        $div->update([
+            'i_tag' => $request->i
+        ]);
+        $div->update($request->all());
+        return redirect()->to(route('site.feature.div.edit.show', $div->id))->with('success', 'Feature Div Updated Succefully');
+    }
+    public function siteFeatureDivsDelete($div_id)
+    {
+        $div = FeatureDiv::find($div_id);
+        if (!$div) {
+        }
+        $div->delete();
+        return redirect()->to(route('site.feature.divs.show'))->with('success', 'About Div Has Been Deleted Succefully');
+    }
+    // END FEATURE
+
+
+    // START HOW TO ORDER
+
+    // TITLES
+
     public function siteHowToOrderTitles()
     {
         $header = Main::where('name', 'header4')->first();
@@ -122,6 +233,31 @@ class AdminController extends Controller
         Main::where('name', 'paragraph4')->update(array('text' => $request->paragraph));
         return redirect()->to(route('site.howToOrder.titles.show'))->with('success', 'How To Order Titles Has Been Successfully Updated');
     }
+
+    // DIVS
+
+
+    // END HOW TO ORDER
+
+    // CONTACT US MESSAGES
+    public function showContactUsMessages()
+    {
+        $data = ContactUsMessages::all();
+        return view('admin.sitePages.showContactUsMessages', compact('data'));
+    }
+
+    public function DeleteMessage($msg_id)
+    {
+        $msg = ContactUsMessages::find($msg_id);
+        if (!$msg) {
+            return redirect()->to(route('contact.us.messages.show'));
+        }
+        $msg->delete();
+        return redirect()->to(route('contact.us.messages.show'))->with('success', 'Message Deleted Succefully');
+    }
+
+
+
 
 
 

@@ -11,7 +11,7 @@
             <div class="col-sm-12 col-xl-12">
                 <div class="bg-secondary rounded h-100 p-4">
                     <h6 class="mb-4">About Update</h6>
-                    <form action="{{ route('site.about.update') }}" method="POST">
+                    <form action="{{ route('site.about.title.update') }}" method="POST">
                         @csrf
                         {{-- Header --}}
                         <div class="mb-3">
