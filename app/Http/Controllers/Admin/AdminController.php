@@ -25,7 +25,8 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
 
-    //hamada-styles/images/logo.png
+
+    // *********************** START SITE CONFIG ***********************
 
     public function siteConfiuration()
     {
@@ -49,6 +50,12 @@ class AdminController extends Controller
         return redirect()->to(route('site.config.show'))->with('success', 'Site Configuration Has Been Successfully Updated');
     }
 
+    // *********************** END SITE CONFIG ***********************
+
+
+
+    // *********************** START HEADER ***********************
+
     public function siteHeader()
     {
         $header = Main::where('name', 'header1')->first();
@@ -71,6 +78,13 @@ class AdminController extends Controller
         Main::where('name', 'paragraph1')->update(array('text' => $request->paragraph));
         return redirect()->to(route('site.header.show'))->with('success', 'Header Has Been Successfully Updated');
     }
+    // *********************** END HEADER ***********************
+
+
+    // *********************** START ABOUT ***********************
+
+    // ------ TITLE ------
+
 
     public function siteAboutTitle()
     {
@@ -91,10 +105,27 @@ class AdminController extends Controller
         return redirect()->to(route('site.about.title.show'))->with('success', 'About Section Has Been Successfully Updated');
     }
 
+    // ------ DIVS ------
+
     public function siteAboutDivs()
     {
         $data = AboutDiv::all();
         return view('admin.sitePages.showAboutDivs', compact('data'));
+    }
+    public function siteAboutNewDiv()
+    {
+        return view('admin.sitePages.aboutDivNewShow');
+    }
+    public function siteAboutNewDivStore(AboutDivRequest $request)
+    {
+        AboutDiv::create(
+            [
+                'span' => $request->span,
+                'header' => $request->header,
+                'paragraph' => $request->paragraph,
+            ]
+        );
+        return redirect()->to(route('site.about.divs.show'))->with('success', 'A New About Div Has Been Created Succefully');
     }
     public function siteAboutDivsEdit($div_id)
     {
@@ -117,29 +148,21 @@ class AdminController extends Controller
     {
         $div = AboutDiv::find($div_id);
         if (!$div) {
+            return redirect()->to(route('site.about.divs.show'));
         }
         $div->delete();
         return redirect()->to(route('site.about.divs.show'))->with('success', 'About Div Has Been Deleted Succefully');
     }
-    public function siteAboutNewDiv()
-    {
-        return view('admin.sitePages.aboutDivNewShow');
-    }
-    public function siteAboutNewDivStore(AboutDivRequest $request)
-    {
-        AboutDiv::create(
-            [
-                'span' => $request->span,
-                'header' => $request->header,
-                'paragraph' => $request->paragraph,
-            ]
-        );
-        return redirect()->to(route('site.about.divs.show'))->with('success', 'A New About Div Has Been Created Succefully');
-    }
 
-    // START FEATURE
 
-    //TITLES
+    // *********************** END ABOUT ***********************
+
+
+
+
+    // *********************** START FEATURE ***********************
+
+    // ------ TITLES ------
     public function siteFeatureTitles()
     {
         $header = Main::where('name', 'header3')->first();
@@ -209,16 +232,18 @@ class AdminController extends Controller
     {
         $div = FeatureDiv::find($div_id);
         if (!$div) {
+            return redirect()->to(route('site.feature.divs.show'));
         }
         $div->delete();
         return redirect()->to(route('site.feature.divs.show'))->with('success', 'About Div Has Been Deleted Succefully');
     }
-    // END FEATURE
+
+    // *********************** END FEATURE ***********************
 
 
-    // START HOW TO ORDER
+    // *********************** START HOW TO ORDER ***********************
 
-    // TITLES
+    // ------ TITLES ------
 
     public function siteHowToOrderTitles()
     {
@@ -239,9 +264,7 @@ class AdminController extends Controller
         return redirect()->to(route('site.howToOrder.titles.show'))->with('success', 'How To Order Titles Has Been Successfully Updated');
     }
 
-    // DIVS
-
-    //*********************************************************************************************************
+    // ------ DIVS ------
 
     public function siteStepDivs()
     {
@@ -291,16 +314,21 @@ class AdminController extends Controller
     {
         $div = StepDiv::find($div_id);
         if (!$div) {
+            return redirect()->to(route('site.step.divs.show'));
         }
         $div->delete();
         return redirect()->to(route('site.step.divs.show'))->with('success', 'Step Has Been Deleted Succefully');
     }
 
 
-    // END HOW TO ORDER
+    // *********************** END HOW TO ORDER ***********************
 
 
-    // START CUSTOMER OPINION SECTION
+
+    // *********************** START CUSTOMER OPINION ***********************
+
+    // ------ TITLE ------
+
     public function siteCustomerOpinionDivs()
     {
         $data = CustomerOpenionDiv::all();
@@ -351,13 +379,16 @@ class AdminController extends Controller
     {
         $div = CustomerOpenionDiv::find($div_id);
         if (!$div) {
+            return redirect()->to(route('site.customer-opinion.divs.show'));
         }
         $div->delete();
         return redirect()->to(route('site.customer-opinion.divs.show'))->with('success', 'Customer Opinion Has Been Deleted Succefully');
     }
-    // END CUSTOMER OPINION SECTION
 
-    // CONTACT US MESSAGES
+    // *********************** END CUSTOMER OPINION ***********************
+
+    // *********************** START CCONTACT US MESSAGES ***********************
+
     public function showContactUsMessages()
     {
         $data = ContactUsMessages::all();
@@ -374,6 +405,11 @@ class AdminController extends Controller
         return redirect()->to(route('contact.us.messages.show'))->with('success', 'Message Deleted Succefully');
     }
 
+    // *********************** END CCONTACT US MESSAGES ***********************
+
+
+
+    // *********************** STATIC FUNCTIONS ***********************
 
     public function savePhoto($request, $path)
     {

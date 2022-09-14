@@ -15,10 +15,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'admin'], function () {
+    // SITE CONFIG
     Route::get('site-config', [AdminController::class, 'siteConfiuration'])->name('site.config.show');
     Route::post('update/site-config', [AdminController::class, 'updateSiteConfig'])->name('site.config.update');
+    // END SITE CONFIG
+
+    // HEADER TITLES
     Route::get('header', [AdminController::class, 'siteHeader'])->name('site.header.show');
     Route::post('update/site-header', [AdminController::class, 'updateSiteHeader'])->name('site.header.update');
+    // END HEADER TITLES
+
     //ABOUT TITLES
     Route::get('about/titles', [AdminController::class, 'siteAboutTitle'])->name('site.about.title.show');
     Route::post('update/site-about/titles', [AdminController::class, 'updateSiteAboutTitle'])->name('site.about.title.update');
@@ -45,15 +51,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('feature/div/delete/{div_id}', [AdminController::class, 'siteFeatureDivsDelete'])->name('site.feature.div.delete');
     // END FEATURES DIVS
 
-
-    // HOW TO ORDER
-    // ****************************************************************************************************
-
-    // TITLES
+    // HOW TO ORDER TITLES
     Route::get('how-to-order/titles', [AdminController::class, 'siteHowToOrderTitles'])->name('site.howToOrder.titles.show');
     Route::post('update/site-how-to-order/titles', [AdminController::class, 'updateSiteHowToOrderTitls'])->name('site.howToOrder.titles.update');
 
-    // START HOW TO ORDER DIVS
+    // START HOW TO ORDER (STEPS) DIVS
     Route::get('step/div/new', [AdminController::class, 'siteStepNewDiv'])->name('site.step.div.new');
     Route::post('step/div/new/store', [AdminController::class, 'siteStepNewDivStore'])->name('site.step.div.new.store');
     Route::get('step/divs', [AdminController::class, 'siteStepDivs'])->name('site.step.divs.show');
@@ -61,8 +63,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('step/divs/update', [AdminController::class, 'siteStepDivsUpdate'])->name('site.step.div.update');
     Route::get('step/div/delete/{div_id}', [AdminController::class, 'siteStepDivsDelete'])->name('site.step.div.delete');
     // END HOW TO ORDER DIVS
-    // ****************************************************************************************************
-
 
     // START CUSOMER OPINION DIVS
     Route::get('customer-opinion/div/new', [AdminController::class, 'siteCustomerOpinionNewDiv'])->name('site.customer-opinion.div.new');
@@ -72,7 +72,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('customer-opinion/divs/update', [AdminController::class, 'siteCustomerOpinionDivsUpdate'])->name('site.customer-opinion.div.update');
     Route::get('customer-opinion/div/delete/{div_id}', [AdminController::class, 'siteCustomerOpinionDivsDelete'])->name('site.customer-opinion.div.delete');
     // END CUSOMER OPINION DIVS
-
 
     // CONTACT US MESSAGES
     Route::get('contact-us/messages', [AdminController::class, 'showContactUsMessages'])->name('contact.us.messages.show');
