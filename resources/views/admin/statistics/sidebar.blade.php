@@ -54,7 +54,7 @@
                         class="fa fa-laptop me-2"></i>How To Order Section</a>
                 <div class="dropdown-menu bg-transparent border-0">
                     <a href="{{ route('site.howToOrder.titles.show') }}" class="dropdown-item">Update Titles</a>
-                    <a href="{{ route('site.how-to-order.divs.show') }}" class="dropdown-item">Divs</a>
+                    <a href="{{ route('site.step.divs.show') }}" class="dropdown-item">Step Divs</a>
                 </div>
             </div>
             <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Order Section</a>

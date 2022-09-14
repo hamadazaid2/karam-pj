@@ -47,19 +47,22 @@ Route::group(['prefix' => 'admin'], function () {
 
 
     // HOW TO ORDER
+    // ****************************************************************************************************
 
     // TITLES
     Route::get('how-to-order/titles', [AdminController::class, 'siteHowToOrderTitles'])->name('site.howToOrder.titles.show');
     Route::post('update/site-how-to-order/titles', [AdminController::class, 'updateSiteHowToOrderTitls'])->name('site.howToOrder.titles.update');
 
     // START HOW TO ORDER DIVS
-    Route::get('how-to-order/div/new', [AdminController::class, 'siteHowToOrderNewDiv'])->name('site.how-to-order.div.new');
-    Route::post('how-to-order/div/new/store', [AdminController::class, 'siteHowToOrderNewDivStore'])->name('site.how-to-order.div.new.store');
-    Route::get('how-to-order/divs', [AdminController::class, 'siteHowToOrderDivs'])->name('site.how-to-order.divs.show');
-    Route::get('how-to-order/divs/edit/{div_id}', [AdminController::class, 'siteHowToOrderDivsEdit'])->name('site.how-to-order.div.edit.show');
-    Route::post('how-to-order/divs/update', [AdminController::class, 'siteHowToOrderDivsUpdate'])->name('site.how-to-order.div.update');
-    Route::get('how-to-order/div/delete/{div_id}', [AdminController::class, 'siteHowToOrderDivsDelete'])->name('site.how-to-order.div.delete');
+    Route::get('step/div/new', [AdminController::class, 'siteStepNewDiv'])->name('site.step.div.new');
+    Route::post('step/div/new/store', [AdminController::class, 'siteStepNewDivStore'])->name('site.step.div.new.store');
+    Route::get('step/divs', [AdminController::class, 'siteStepDivs'])->name('site.step.divs.show');
+    Route::get('step/divs/edit/{div_id}', [AdminController::class, 'siteStepDivsEdit'])->name('site.step.div.edit.show');
+    Route::post('step/divs/update', [AdminController::class, 'siteStepDivsUpdate'])->name('site.step.div.update');
+    Route::get('step/div/delete/{div_id}', [AdminController::class, 'siteStepDivsDelete'])->name('site.step.div.delete');
     // END HOW TO ORDER DIVS
+    // ****************************************************************************************************
+
 
     // START CUSOMER OPINION DIVS
     Route::get('customer-opinion/div/new', [AdminController::class, 'siteCustomerOpinionNewDiv'])->name('site.customer-opinion.div.new');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminRequests\StepDivRequest;
 use App\Http\Requests\AdminRequests\AboutDivRequest;
 use App\Http\Requests\AdminRequests\AboutRequest;
 use App\Http\Requests\AdminRequests\CustomerOpinionRequest;
@@ -10,6 +11,7 @@ use App\Http\Requests\AdminRequests\FeatureDivRequest;
 use App\Http\Requests\AdminRequests\HeaderRequest;
 use App\Http\Requests\AdminRequests\HowToOrderRequest;
 use App\Http\Requests\AdminRequests\SiteConfigRequest;
+use App\Http\Requests\AdminRequests\StepDivRequest as AdminRequestsStepDivRequest;
 use App\Http\Requests\AdminRequests\UpdateAboutDivRequest;
 use App\Models\AboutDiv;
 use App\Models\ContactUsMessages;
@@ -17,6 +19,7 @@ use App\Models\CustomerOpenionDiv;
 use App\Models\FeatureDiv;
 use App\Models\Main;
 use App\Models\SiteSetup;
+use App\Models\StepDiv;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -238,12 +241,66 @@ class AdminController extends Controller
 
     // DIVS
 
+    //*********************************************************************************************************
+
+    public function siteStepDivs()
+    {
+        $data = StepDiv::all();
+        return view('admin.sitePages.showStepDivs', compact('data'));
+    }
+    public function siteStepNewDiv()
+    {
+        return view('admin.sitePages.stepDivNewShow');
+    }
+    public function siteStepNewDivStore(StepDivRequest $request)
+    {
+        $file_name = $this->savePhoto($request->img, 'hamada-styles/imgs');
+        StepDiv::create(
+            [
+                'header' => $request->header,
+                'paragraph' => $request->paragraph,
+                'img' => $file_name,
+            ]
+        );
+        return redirect()->to(route('site.step.divs.show'))->with('success', 'A New Step Has Been Created Succefully');
+    }
+
+    public function siteStepDivsEdit($div_id)
+    {
+        $div = StepDiv::find($div_id);
+        if (!$div) {
+            return redirect()->to(route('site.step.divs.show'));
+        }
+        return view('admin.sitePages.stepDivUpdateShow', compact('div'));
+    }
+    public function siteStepDivsUpdate(StepDivRequest $request)
+    {
+        $div = StepDiv::find($request->id);
+        $file_name = $this->savePhoto($request->img, 'hamada-styles/imgs');
+        if (!$div) {
+            return redirect()->to(route('site.step.divs.show'));
+        }
+        $div->update($request->all());
+        $div->update([
+            'img' => $file_name,
+        ]);
+        return redirect()->to(route('site.step.div.edit.show', $div->id))->with('success', 'Step Updated Succefully');
+    }
+
+    public function siteStepDivsDelete($div_id)
+    {
+        $div = StepDiv::find($div_id);
+        if (!$div) {
+        }
+        $div->delete();
+        return redirect()->to(route('site.step.divs.show'))->with('success', 'Step Has Been Deleted Succefully');
+    }
+
 
     // END HOW TO ORDER
 
 
     // START CUSTOMER OPINION SECTION
-    // *****************************************************************************************
     public function siteCustomerOpinionDivs()
     {
         $data = CustomerOpenionDiv::all();
@@ -298,7 +355,6 @@ class AdminController extends Controller
         $div->delete();
         return redirect()->to(route('site.customer-opinion.divs.show'))->with('success', 'Customer Opinion Has Been Deleted Succefully');
     }
-    // *****************************************************************************************
     // END CUSTOMER OPINION SECTION
 
     // CONTACT US MESSAGES
@@ -317,18 +373,6 @@ class AdminController extends Controller
         $msg->delete();
         return redirect()->to(route('contact.us.messages.show'))->with('success', 'Message Deleted Succefully');
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public function savePhoto($request, $path)
