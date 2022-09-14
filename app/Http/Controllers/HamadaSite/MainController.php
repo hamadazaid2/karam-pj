@@ -32,7 +32,7 @@ class MainController extends Controller
             'about_divs' => $about_divs,
             'feature_divs' => $feature_divs,
             'steps_divs' => $steps_divs,
-            'customer_openion' => $customer_openion,
+            'customer_opinion' => $customer_openion,
         ];
         return view('hamadaSite.index', compact('data'));
     }

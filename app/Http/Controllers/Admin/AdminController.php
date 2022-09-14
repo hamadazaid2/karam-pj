@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminRequests\AboutDivRequest;
 use App\Http\Requests\AdminRequests\AboutRequest;
+use App\Http\Requests\AdminRequests\CustomerOpinionRequest;
 use App\Http\Requests\AdminRequests\FeatureDivRequest;
 use App\Http\Requests\AdminRequests\HeaderRequest;
 use App\Http\Requests\AdminRequests\HowToOrderRequest;
@@ -12,6 +13,7 @@ use App\Http\Requests\AdminRequests\SiteConfigRequest;
 use App\Http\Requests\AdminRequests\UpdateAboutDivRequest;
 use App\Models\AboutDiv;
 use App\Models\ContactUsMessages;
+use App\Models\CustomerOpenionDiv;
 use App\Models\FeatureDiv;
 use App\Models\Main;
 use App\Models\SiteSetup;
@@ -238,6 +240,66 @@ class AdminController extends Controller
 
 
     // END HOW TO ORDER
+
+
+    // START CUSTOMER OPINION SECTION
+    // *****************************************************************************************
+    public function siteCustomerOpinionDivs()
+    {
+        $data = CustomerOpenionDiv::all();
+        return view('admin.sitePages.showCusomerOpinionDivs', compact('data'));
+    }
+    public function siteCustomerOpinionNewDiv()
+    {
+        return view('admin.sitePages.customerOpinionDivNewShow');
+    }
+    public function siteCustomerOpinionNewDivStore(CustomerOpinionRequest $request)
+    {
+        // return 'hello world';
+        $file_name = $this->savePhoto($request->customerPhoto, 'hamada-styles/imgs');
+        CustomerOpenionDiv::create(
+            [
+                'img' => $file_name,
+                'name' => $request->name,
+                'job_title' => $request->jobTitle,
+                'opinion' => $request->opinion,
+            ]
+        );
+        // return $opinion;
+        return redirect()->to(route('site.customer-opinion.divs.show'))->with('success', 'A New Customer Opinion Has Been Created Succefully');
+    }
+    public function siteCustomerOpinionDivsEdit($div_id)
+    {
+        $div = CustomerOpenionDiv::find($div_id);
+        if (!$div) {
+            return redirect()->to(route('site.customer-opinion.divs.show'));
+        }
+        return view('admin.sitePages.customerOpinionDivUpdateShow', compact('div'));
+    }
+    public function siteCustomerOpinionDivsUpdate(CustomerOpinionRequest $request)
+    {
+        $div = CustomerOpenionDiv::find($request->id);
+        if (!$div) {
+            return redirect()->to(route('site.customer-opinion.divs.show'));
+        }
+        $file_name = $this->savePhoto($request->customerPhoto, 'hamada-styles/imgs');
+        $div->update([
+            'img' => $file_name,
+            'job_title' => $request->jobTitle,
+        ]);
+        $div->update($request->all());
+        return redirect()->to(route('site.customer-opinion.div.edit.show', $div->id))->with('success', 'Customer Opinion Updated Succefully');
+    }
+    public function siteCustomerOpinionDivsDelete($div_id)
+    {
+        $div = CustomerOpenionDiv::find($div_id);
+        if (!$div) {
+        }
+        $div->delete();
+        return redirect()->to(route('site.customer-opinion.divs.show'))->with('success', 'Customer Opinion Has Been Deleted Succefully');
+    }
+    // *****************************************************************************************
+    // END CUSTOMER OPINION SECTION
 
     // CONTACT US MESSAGES
     public function showContactUsMessages()

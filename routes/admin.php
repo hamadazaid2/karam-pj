@@ -61,8 +61,18 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('how-to-order/div/delete/{div_id}', [AdminController::class, 'siteHowToOrderDivsDelete'])->name('site.how-to-order.div.delete');
     // END HOW TO ORDER DIVS
 
+    // START CUSOMER OPINION DIVS
+    Route::get('customer-opinion/div/new', [AdminController::class, 'siteCustomerOpinionNewDiv'])->name('site.customer-opinion.div.new');
+    Route::post('customer-opinion/div/new/store', [AdminController::class, 'siteCustomerOpinionNewDivStore'])->name('site.customer-opinion.div.new.store');
+    Route::get('customer-opinion/divs', [AdminController::class, 'siteCustomerOpinionDivs'])->name('site.customer-opinion.divs.show');
+    Route::get('customer-opinion/divs/edit/{div_id}', [AdminController::class, 'siteCustomerOpinionDivsEdit'])->name('site.customer-opinion.div.edit.show');
+    Route::post('customer-opinion/divs/update', [AdminController::class, 'siteCustomerOpinionDivsUpdate'])->name('site.customer-opinion.div.update');
+    Route::get('customer-opinion/div/delete/{div_id}', [AdminController::class, 'siteCustomerOpinionDivsDelete'])->name('site.customer-opinion.div.delete');
+    // END CUSOMER OPINION DIVS
+
 
     // CONTACT US MESSAGES
     Route::get('contact-us/messages', [AdminController::class, 'showContactUsMessages'])->name('contact.us.messages.show');
     Route::get('contact-us/messages/delete/{msg_id}', [AdminController::class, 'DeleteMessage'])->name('contact.us.message.delete');
+    // END CONTACT US MESSAGES
 });

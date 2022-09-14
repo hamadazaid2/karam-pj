@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="navbar-nav w-100">
-            <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+            <a href="index.html" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                         class="fa fa-laptop me-2"></i>Elements</a>
@@ -27,13 +27,13 @@
                     <a href="element.html" class="dropdown-item">Other Elements</a>
                 </div>
             </div>
-            <a href="{{ route('site.config.show') }}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Site
+            <a href="{{ route('site.config.show') }}" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>Site
                 Configuration</a>
             <a href="{{ route('site.header.show') }}" class="nav-item nav-link"><i
                     class="fa fa-keyboard me-2"></i>Header Section</a>
             {{-- <a href="" class="nav-item nav-link"><i class="fa fa-table me-2"></i>About
                 Section</a> --}}
-                 <div class="nav-item dropdown">
+            <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                         class="fa fa-laptop me-2"></i>About Section</a>
                 <div class="dropdown-menu bg-transparent border-0">
@@ -58,8 +58,10 @@
                 </div>
             </div>
             <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Order Section</a>
-            <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Customer Section</a>
-            <a href="{{ route('contact.us.messages.show') }}" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Contact Messages</a>
+            <a href="{{ route('site.customer-opinion.divs.show') }}" class="nav-item nav-link"><i
+                    class="fa fa-chart-bar me-2"></i>Customer Opinions Section</a>
+            <a href="{{ route('contact.us.messages.show') }}" class="nav-item nav-link"><i
+                    class="fa fa-chart-bar me-2"></i>Contact Messages</a>
         </div>
     </nav>
 </div>

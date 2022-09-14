@@ -246,16 +246,16 @@
                 </div>
                 <div class="owl-carousel" id="customerSlider">
                     {{-- CUSTOMER OPINION DIVS --}}
-                    @foreach ($data['customer_openion'] as $openion)
+                    @foreach ($data['customer_opinion'] as $opinion)
                         <div class="item">
                             <div class="client-item">
                                 <div class="client-link">
-                                    <img src="{{ $openion->img }}" alt="" class="img-responsive">
+                                    <img src="{{ $opinion->img }}" alt="" class="img-responsive">
                                 </div>
                                 <div class="secTitle">
-                                    <h4>{{ $openion->header }}</h4>
-                                    <span>{{ $openion->header2 }}</span>
-                                    <p>{{ $openion->paragraph }}</p>
+                                    <h4>{{ $opinion->name }}</h4>
+                                    <span>{{ $opinion->job_title }}</span>
+                                    <p>{{ $opinion->opinion }}</p>
                                 </div>
                             </div>
                         </div>

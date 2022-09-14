@@ -9,6 +9,6 @@ class CustomerOpenionDiv extends Model
 {
     use HasFactory;
     protected $table = 'customer_openion_divs';
-    protected $fillable = ['img', 'header', 'header2', 'paragraph'];
+    protected $fillable = ['img', 'name', 'job_title', 'opinion'];
     public $timestamps = false;
 }
