@@ -47,7 +47,8 @@ class AdminController extends Controller
     }
     public function updateSiteConfig(SiteConfigRequest $request)
     {
-        //  $file_name = $this->savePhoto($request->photo, 'images/offers');
+        $logo = SiteSetup::select('content')->where('name', 'logo')->first();
+        unlink($logo->content);
         $file_name = $this->savePhoto($request->logo, 'hamada-styles/imgs');
         SiteSetup::where('name', 'logo')->update(array('content' => $file_name));
         SiteSetup::where('name', 'address')->update(array('content' => $request->address));
@@ -85,6 +86,8 @@ class AdminController extends Controller
 
     public function updateSiteHeader(HeaderRequest $request)
     {
+        $logo = Main::select('text')->where('name', 'img1')->first();
+        unlink($logo->text);
         $file_name = $this->savePhoto($request->img, 'hamada-styles/imgs');
         Main::where('name', 'img1')->update(array('text' => $file_name));
         Main::where('name', 'header1')->update(array('text' => $request->head));
@@ -197,6 +200,8 @@ class AdminController extends Controller
 
     public function updateSiteFeatureTitls(AboutRequest $request)
     {
+        $img = Main::select('text')->where('name', 'img2')->first();
+        unlink($img->text);
         $file_name = $this->savePhoto($request->img, 'hamada-styles/imgs');
         Main::where('name', 'img2')->update(array('text' => $file_name));
         Main::where('name', 'header3')->update(array('text' => $request->head));
@@ -324,6 +329,7 @@ class AdminController extends Controller
     public function siteStepDivsUpdate(StepDivRequest $request)
     {
         $div = StepDiv::find($request->id);
+        unlink($div->img);
         $file_name = $this->savePhoto($request->img, 'hamada-styles/imgs');
         if (!$div) {
             return redirect()->to(route('site.step.divs.show'));
@@ -338,6 +344,7 @@ class AdminController extends Controller
     public function siteStepDivsDelete($div_id)
     {
         $div = StepDiv::find($div_id);
+        unlink($div->img);
         if (!$div) {
             return redirect()->to(route('site.step.divs.show'));
         }
@@ -392,6 +399,7 @@ class AdminController extends Controller
     public function siteCustomerOpinionDivsUpdate(CustomerOpinionRequest $request)
     {
         $div = CustomerOpenionDiv::find($request->id);
+        unlink($div->img);
         if (!$div) {
             return redirect()->to(route('site.customer-opinion.divs.show'));
         }
@@ -406,6 +414,7 @@ class AdminController extends Controller
     public function siteCustomerOpinionDivsDelete($div_id)
     {
         $div = CustomerOpenionDiv::find($div_id);
+        unlink($div->img);
         if (!$div) {
             return redirect()->to(route('site.customer-opinion.divs.show'));
         }

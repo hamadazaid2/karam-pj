@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Hamada Site</title>
+    <title>Hamada App</title>
     <link href="{{ asset('hamada-styles/imgs/site-icon.png') }}" rel="icon">
 
 
@@ -19,7 +19,7 @@
     <link href="{{ asset('hamada-styles/css/responsive.css') }}" rel="stylesheet">
 
     <style>
-        .small-error-message{
+        .small-error-message {
             color: red;
         }
     </style>
@@ -193,24 +193,49 @@
                 </div>
                 <div class="sec_warpper">
                     <div class="features_list">
+                        @php
+                            $i = 1;
+                        @endphp
                         @foreach ($data['steps_divs'] as $step)
-                            <div class="feature_item">
-                                <div class="row">
-                                    <div class="col-sm-7">
-                                        <div class="feature_thumb wow fadeInLeft" data-wow-duration="1s"
-                                            data-wow-delay="0.500s">
-                                            <img src="{{ $step->img }}" alt="" class="img-responsive">
+                            @if ($i++ % 2 == 0)
+                                <div class="feature_item">
+                                    <div class="row">
+                                        <div class="col-sm-push-5 col-sm-7">
+                                            <div class="feature_thumb wow fadeInLeft" data-wow-duration="1s"
+                                                data-wow-delay="0.500s">
+                                                <img src="{{ $step->img }}" alt=""
+                                                    class="img-responsive">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-5">
-                                        <div class="feature_txt wow fadeInUp" data-wow-duration="1s"
-                                            data-wow-delay="0.600s">
-                                            <h2>{{ $step->header }}</h2>
-                                            <p>{{ $step->paragraph }}</p>
+                                        <div class="col-sm-pull-7 col-sm-5">
+                                            <div class="feature_txt wow fadeInUp" data-wow-duration="1s"
+                                                data-wow-delay="0.600s">
+                                                <h2>{{ $step->header }}</h2>
+                                                <p>{{ $step->paragraph }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            @else
+                                <div class="feature_item">
+                                    <div class="row">
+                                        <div class="col-sm-7">
+                                            <div class="feature_thumb wow fadeInLeft" data-wow-duration="1s"
+                                                data-wow-delay="0.500s">
+                                                <img src="{{ $step->img }}" alt=""
+                                                    class="img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <div class="feature_txt wow fadeInUp" data-wow-duration="1s"
+                                                data-wow-delay="0.600s">
+                                                <h2>{{ $step->header }}</h2>
+                                                <p>{{ $step->paragraph }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         @endforeach
 
                         {{-- <div class="feature_item">
@@ -359,9 +384,9 @@
                                 </div>
                                 <button type="submit" class="btn btn_contact">SEND</button>
                                 @if (Session::has('success'))
-                                <br>
-                                <br>
-                                <br>
+                                    <br>
+                                    <br>
+                                    <br>
                                     <div class="alert alert-success" role="alert">
                                         {{ Session::get('success') }}
                                     </div>
