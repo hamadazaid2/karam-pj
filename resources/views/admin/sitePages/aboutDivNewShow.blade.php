@@ -40,7 +40,7 @@
                                 <small class="small-error-message">{{ $message }}</small>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-primary">ADD</button>
                     </form>
                 </div>
             </div>

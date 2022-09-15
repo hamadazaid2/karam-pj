@@ -10,7 +10,7 @@
         <div class="row g-4">
             <div class="col-sm-12 col-xl-12">
                 <div class="bg-secondary rounded h-100 p-4">
-                    <h6 class="mb-4">Site Configuration</h6>
+                    <h6 class="mb-4">Site Configuration Update</h6>
                     <form action="{{ route('site.config.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         {{-- File Input --}}

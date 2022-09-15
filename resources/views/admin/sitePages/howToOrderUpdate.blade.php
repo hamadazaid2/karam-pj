@@ -10,7 +10,8 @@
         <div class="row g-4">
             <div class="col-sm-12 col-xl-12">
                 <div class="bg-secondary rounded h-100 p-4">
-                    <h6 class="mb-4">How To Order Update</h6>
+                    <h6 class="mb-4">How To Order Title Update
+                    </h6>
                     <form action="{{ route('site.howToOrder.titles.update') }}" method="POST">
                         @csrf
                         {{-- Header --}}

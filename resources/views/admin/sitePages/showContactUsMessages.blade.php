@@ -7,7 +7,7 @@
                 {{ Session::get('success') }}
             </div>
         @endif
-        <h6 class="mb-4">Responsive Table</h6>
+        <h6 class="mb-4">Contact Us Messages</h6>
         <div class="table-responsive">
             <table class="table">
                 <thead>

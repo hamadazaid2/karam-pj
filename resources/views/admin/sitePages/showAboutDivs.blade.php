@@ -7,7 +7,7 @@
                 {{ Session::get('success') }}
             </div>
         @endif
-        <h6 class="mb-4">Responsive Table</h6>
+        <h6 class="mb-4">About Divs</h6>
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -41,9 +41,11 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $data->links('vendor.pagination.bootstrap-5') }}
+
         </div>
-        <a href="{{ route('site.about.div.new') }}" style="width: 190px"
-            class="btn btn-square btn-success m-2"><i class="fa fa-plus" style="padding-right: 15px"></i>ADD NEW DIV</a>
+        <a href="{{ route('site.about.div.new') }}" style="width: 190px" class="btn btn-square btn-success m-2"><i
+                class="fa fa-plus" style="padding-right: 15px"></i>ADD NEW DIV</a>
     </div>
     <!-- Form End -->
 @endsection

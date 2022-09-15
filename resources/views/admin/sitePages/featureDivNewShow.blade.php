@@ -10,14 +10,14 @@
         <div class="row g-4">
             <div class="col-sm-12 col-xl-12">
                 <div class="bg-secondary rounded h-100 p-4">
-                    <h6 class="mb-4">Add New Feature Div</h6>
+                    <h6 class="mb-4">Add New Feature</h6>
                     <form action="{{ route('site.feature.div.new.store') }}" method="POST">
                         @csrf
                         {{-- Span --}}
                         <div class="mb-3">
                             <label for="iInput" class="form-label">i Tag</label>
                             <input type="text" class="form-control" id="iInput"
-                                name="i">
+                                name="i" placeholder='Example: fa fa-home'>
                             @error('i')
                                 <small class="small-error-message">{{ $message }}</small>
                             @enderror
@@ -40,7 +40,7 @@
                                 <small class="small-error-message">{{ $message }}</small>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-primary">ADD</button>
                     </form>
                 </div>
             </div>

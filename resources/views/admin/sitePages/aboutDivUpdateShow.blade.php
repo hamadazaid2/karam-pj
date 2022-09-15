@@ -24,7 +24,7 @@
                         </div>
                         {{-- Span --}}
                         <div class="mb-3">
-                            <label for="spanInput" class="form-label">Address</label>
+                            <label for="spanInput" class="form-label">Span</label>
                             <input type="text" class="form-control" id="spanInput" value="{{ $div->span }}"
                                 name="span">
                             @error('span')

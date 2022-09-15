@@ -25,6 +25,11 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 
     // *********************** START SITE CONFIG ***********************
 
@@ -109,7 +114,7 @@ class AdminController extends Controller
 
     public function siteAboutDivs()
     {
-        $data = AboutDiv::all();
+        $data = AboutDiv::paginate(PAGINATE_NUMBER);
         return view('admin.sitePages.showAboutDivs', compact('data'));
     }
     public function siteAboutNewDiv()
@@ -190,7 +195,7 @@ class AdminController extends Controller
 
     public function siteFeatureDivs()
     {
-        $data = FeatureDiv::all();
+        $data = FeatureDiv::paginate(PAGINATE_NUMBER);
         return view('admin.sitePages.showFeatureDivs', compact('data'));
     }
     public function siteFeatureNewDiv()
@@ -268,7 +273,7 @@ class AdminController extends Controller
 
     public function siteStepDivs()
     {
-        $data = StepDiv::all();
+        $data = StepDiv::paginate(PAGINATE_NUMBER);
         return view('admin.sitePages.showStepDivs', compact('data'));
     }
     public function siteStepNewDiv()
@@ -327,11 +332,11 @@ class AdminController extends Controller
 
     // *********************** START CUSTOMER OPINION ***********************
 
-    // ------ TITLE ------
+    // ------ DIVS ------
 
     public function siteCustomerOpinionDivs()
     {
-        $data = CustomerOpenionDiv::all();
+        $data = CustomerOpenionDiv::paginate(PAGINATE_NUMBER);
         return view('admin.sitePages.showCusomerOpinionDivs', compact('data'));
     }
     public function siteCustomerOpinionNewDiv()
@@ -405,7 +410,7 @@ class AdminController extends Controller
         return redirect()->to(route('contact.us.messages.show'))->with('success', 'Message Deleted Succefully');
     }
 
-    // *********************** END CCONTACT US MESSAGES ***********************
+    // *********************** END CONTACT US MESSAGES ***********************
 
 
 
