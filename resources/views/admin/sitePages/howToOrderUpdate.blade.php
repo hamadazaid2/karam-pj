@@ -1,4 +1,7 @@
 @extends('admin.layout.layout')
+@section('title')
+Update How To Order Titles
+@endsection
 @section('content')
     <!-- Form Start -->
     <div class="container-fluid pt-4 px-4">

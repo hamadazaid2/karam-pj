@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'admin'], function () {
+    Route::get('dashboard', [AdminController::class, 'dashboard'])->name('site.dashboard.show');
+
     // SITE CONFIG
     Route::get('site-config', [AdminController::class, 'siteConfiuration'])->name('site.config.show');
     Route::post('update/site-config', [AdminController::class, 'updateSiteConfig'])->name('site.config.update');

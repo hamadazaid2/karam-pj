@@ -1,5 +1,8 @@
 @extends('admin.layout.layout')
 @section('content')
+@section('title')
+Update About
+@endsection
     <!-- Form Start -->
     <div class="container-fluid pt-4 px-4">
         @if (Session::has('success'))

@@ -39,12 +39,12 @@ class MainController extends Controller
 
     public function storeMessage(ContactUsMessageRequest $request)
     {
-        ContactUsMessages::create([
+        $data = ContactUsMessages::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'message' => $request->message,
         ]);
-        return redirect()->to(route('index'))->with('success', 'Your message was sent successfully');
+        return redirect()->to(route('index') . '#section-6')->with('success', 'Your message was sent successfully');
     }
 }

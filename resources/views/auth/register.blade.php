@@ -12,7 +12,8 @@
                             @csrf
 
                             <div class="row mb-3">
-                                <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+                                <label for="name"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
@@ -77,7 +78,8 @@
                                         class="col-md-4 col-form-label text-md-end">{{ __('Your Image') }}</label>
 
                                     <div class="col-md-6" style="padding-left: 1.2rem;">
-                                        <input id="img" type="file" class="form-control" name="img" required>
+                                        <input id="img" type="file" class="form-control" name="img"
+                                            accept=".png, .jpg, .jpeg" required>
                                     </div>
                                 </div>
                             </div>

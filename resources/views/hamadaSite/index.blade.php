@@ -3,7 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Hamada</title>
+    <title>Hamada Site</title>
+    <link href="{{ asset('hamada-styles/imgs/site-icon.png') }}" rel="icon">
+
 
 
     <link href="{{ asset('hamada-styles/css/bootstrap.css') }}" rel="stylesheet">
@@ -118,7 +120,7 @@
                                     style="visibility: visible; animation-duration: 1s; animation-delay: 0.8s; animation-name: fadeInUp;">
                                     <div class="serv_icon">
                                         <div class="bgIconFix">
-                                            {!! $div->i_tag !!}
+                                            {!! $div->span !!}
                                         </div>
                                     </div>
                                     <div class="serv_txt">

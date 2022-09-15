@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\HamadaSite\MainController;
 use App\Http\Requests\AdminRequests\StepDivRequest;
 use App\Http\Requests\AdminRequests\AboutDivRequest;
 use App\Http\Requests\AdminRequests\AboutRequest;
@@ -29,6 +30,11 @@ class AdminController extends Controller
     {
         $this->middleware('auth');
     }
+    public function dashboard()
+    {
+        $activity = 'dashboard';
+        return view('admin.sitePages.Dashboard', compact('activity'));
+    }
 
 
     // *********************** START SITE CONFIG ***********************
@@ -36,7 +42,8 @@ class AdminController extends Controller
     public function siteConfiuration()
     {
         $data = SiteSetup::all();
-        return view('admin.sitePages.siteConfiguration', compact('data'));
+        $activity = 'site-config';
+        return view('admin.sitePages.siteConfiguration', compact('data', 'activity'));
     }
     public function updateSiteConfig(SiteConfigRequest $request)
     {
@@ -71,8 +78,9 @@ class AdminController extends Controller
             'paragraph' => $paragraph,
             'img' => $img
         ];
+        $activity = 'header';
         // return $data;
-        return view('admin.sitePages.headerUpdate', compact('data'));
+        return view('admin.sitePages.headerUpdate', compact('data', 'activity'));
     }
 
     public function updateSiteHeader(HeaderRequest $request)
@@ -99,8 +107,9 @@ class AdminController extends Controller
             'header' => $header,
             'paragraph' => $paragraph,
         ];
+        $activity = 'about';
         // return $data;
-        return view('admin.sitePages.aboutUpdate', compact('data'));
+        return view('admin.sitePages.aboutUpdate', compact('data', 'activity'));
     }
 
     public function updateSiteAboutTitle(AboutRequest $request)
@@ -115,11 +124,13 @@ class AdminController extends Controller
     public function siteAboutDivs()
     {
         $data = AboutDiv::paginate(PAGINATE_NUMBER);
-        return view('admin.sitePages.showAboutDivs', compact('data'));
+        $activity = 'about';
+        return view('admin.sitePages.showAboutDivs', compact('data', 'activity'));
     }
     public function siteAboutNewDiv()
     {
-        return view('admin.sitePages.aboutDivNewShow');
+        $activity = 'about';
+        return view('admin.sitePages.aboutDivNewShow', compact('activity'));
     }
     public function siteAboutNewDivStore(AboutDivRequest $request)
     {
@@ -138,7 +149,8 @@ class AdminController extends Controller
         if (!$div) {
             return redirect()->to(route('site.about.divs.show'));
         }
-        return view('admin.sitePages.aboutDivUpdateShow', compact('div'));
+        $activity = 'about';
+        return view('admin.sitePages.aboutDivUpdateShow', compact('div', 'activity'));
     }
     public function siteAboutDivsUpdate(AboutDivRequest $request)
     {
@@ -179,7 +191,8 @@ class AdminController extends Controller
             'img' => $img
         ];
         // return $data;
-        return view('admin.sitePages.featureTitlesUpdate', compact('data'));
+        $activity = 'feature';
+        return view('admin.sitePages.featureTitlesUpdate', compact('data', 'activity'));
     }
 
     public function updateSiteFeatureTitls(AboutRequest $request)
@@ -196,11 +209,13 @@ class AdminController extends Controller
     public function siteFeatureDivs()
     {
         $data = FeatureDiv::paginate(PAGINATE_NUMBER);
-        return view('admin.sitePages.showFeatureDivs', compact('data'));
+        $activity = 'feature';
+        return view('admin.sitePages.showFeatureDivs', compact('data', 'activity'));
     }
     public function siteFeatureNewDiv()
     {
-        return view('admin.sitePages.featureDivNewShow');
+        $activity = 'feature';
+        return view('admin.sitePages.featureDivNewShow', compact('activity'));
     }
     public function siteFeatureNewDivStore(FeatureDivRequest $request)
     {
@@ -219,7 +234,8 @@ class AdminController extends Controller
         if (!$div) {
             return redirect()->to(route('site.feature.divs.show'));
         }
-        return view('admin.sitePages.featureDivUpdateShow', compact('div'));
+        $activity = 'feature';
+        return view('admin.sitePages.featureDivUpdateShow', compact('div', 'activity'));
     }
     public function siteFeatureDivsUpdate(FeatureDivRequest $request)
     {
@@ -259,7 +275,8 @@ class AdminController extends Controller
             'paragraph' => $paragraph,
         ];
         // return $data;
-        return view('admin.sitePages.howToOrderUpdate', compact('data'));
+        $activity = 'how-to-order';
+        return view('admin.sitePages.howToOrderUpdate', compact('data', 'activity'));
     }
 
     public function updateSiteHowToOrderTitls(HowToOrderRequest $request)
@@ -274,11 +291,13 @@ class AdminController extends Controller
     public function siteStepDivs()
     {
         $data = StepDiv::paginate(PAGINATE_NUMBER);
-        return view('admin.sitePages.showStepDivs', compact('data'));
+        $activity = 'how-to-order';
+        return view('admin.sitePages.showStepDivs', compact('data', 'activity'));
     }
     public function siteStepNewDiv()
     {
-        return view('admin.sitePages.stepDivNewShow');
+        $activity = 'how-to-order';
+        return view('admin.sitePages.stepDivNewShow', compact('activity'));
     }
     public function siteStepNewDivStore(StepDivRequest $request)
     {
@@ -299,7 +318,8 @@ class AdminController extends Controller
         if (!$div) {
             return redirect()->to(route('site.step.divs.show'));
         }
-        return view('admin.sitePages.stepDivUpdateShow', compact('div'));
+        $activity = 'how-to-order';
+        return view('admin.sitePages.stepDivUpdateShow', compact('div', 'activity'));
     }
     public function siteStepDivsUpdate(StepDivRequest $request)
     {
@@ -337,11 +357,13 @@ class AdminController extends Controller
     public function siteCustomerOpinionDivs()
     {
         $data = CustomerOpenionDiv::paginate(PAGINATE_NUMBER);
-        return view('admin.sitePages.showCusomerOpinionDivs', compact('data'));
+        $activity = 'customer-opinion';
+        return view('admin.sitePages.showCusomerOpinionDivs', compact('data', 'activity'));
     }
     public function siteCustomerOpinionNewDiv()
     {
-        return view('admin.sitePages.customerOpinionDivNewShow');
+        $activity = 'customer-opinion';
+        return view('admin.sitePages.customerOpinionDivNewShow', compact('activity'));
     }
     public function siteCustomerOpinionNewDivStore(CustomerOpinionRequest $request)
     {
@@ -364,7 +386,8 @@ class AdminController extends Controller
         if (!$div) {
             return redirect()->to(route('site.customer-opinion.divs.show'));
         }
-        return view('admin.sitePages.customerOpinionDivUpdateShow', compact('div'));
+        $activity = 'customer-opinion';
+        return view('admin.sitePages.customerOpinionDivUpdateShow', compact('div', 'activity'));
     }
     public function siteCustomerOpinionDivsUpdate(CustomerOpinionRequest $request)
     {
@@ -397,7 +420,8 @@ class AdminController extends Controller
     public function showContactUsMessages()
     {
         $data = ContactUsMessages::all();
-        return view('admin.sitePages.showContactUsMessages', compact('data'));
+        $activity = 'contact-us';
+        return view('admin.sitePages.showContactUsMessages', compact('data', 'activity'));
     }
 
     public function DeleteMessage($msg_id)
